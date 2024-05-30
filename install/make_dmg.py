@@ -14,7 +14,8 @@ def make_executable(path):
 def make_app_bundle(bundle_name, release_path):
 	bundle_basename = f"{bundle_name}/Contents"
 	shutil.copytree(release_path, bundle_basename + "/MacOS")
-	os.rename(bundle_basename + "/MacOS/stub", bundle_basename + '/Resources/stub")
+	os.mkdir(bundle_basename + "/Resources")
+	os.rename(bundle_basename + "/MacOS/stub", bundle_basename + "/Resources/stub")
 
 def make_dmg(src_dir, filename):
 	subprocess.check_call(["hdiutil", "create", "-srcfolder", src_dir, filename])
