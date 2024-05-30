@@ -74,6 +74,7 @@ function main {
 	setup_homebrew
 	setup_angelscript
 	setup_enet
+	setup_poco
 	setup_nvgt
 	echo Success!
 	exit 0
