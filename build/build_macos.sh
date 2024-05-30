@@ -90,7 +90,7 @@ function setup_nvgt {
 
 function main {
 	set -e
-	mkdir deps
+	mkdir -p deps
 	cd deps
 	
 	setup_angelscript
