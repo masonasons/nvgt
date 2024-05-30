@@ -34,6 +34,9 @@ function setup_libgit2 {
 	echo Installing libgit2...
 	git clone https://github.com/libgit2/libgit2
 	cd libgit2
+	git fetch --tags
+	latest_tag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
+	git checkout $latestTag
 	mkdir build
 	cd build
 	cmake ..
@@ -47,6 +50,9 @@ function setup_poco {
 	echo Installing poco...
 	git clone https://github.com/pocoproject/poco
 	cd poco
+	git fetch --tags
+	latest_tag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
+	git checkout $latestTag
 	./configure --static --no-tests --no-samples
 	make -s -j16
 	sudo make install
