@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+function setup_homebrew {
+	brew install autoconf automake libgit2 libtool openssl sdl2 bullet poco
+}
+
 function setup_angelscript {
 	echo Installing Angelscript...
 	git clone https://github.com/codecat/angelscript-mirror
@@ -13,11 +17,6 @@ function setup_angelscript {
 	echo Angelscript installed.
 }
 
-function setup_bullet {
-	echo Installing bullet3...
-	brew install bullet
-}
-
 function setup_enet {
 	echo Installing enet...
 	git clone https://github.com/lsalzman/enet
@@ -28,36 +27,6 @@ function setup_enet {
 	sudo make install
 	cd ..
 	echo Enet installed.
-}
-
-function setup_libgit2 {
-	echo Installing libgit2...
-	git clone https://github.com/libgit2/libgit2
-	cd libgit2
-	git fetch --tags
-	latest_tag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
-	git checkout $latestTag
-	mkdir build
-	cd build
-	cmake ..
-	cmake --build .
-	sudo cmake --install .
-	cd ../..
-	echo libgit2 installed.
-}
-
-function setup_poco {
-	echo Installing poco...
-	git clone https://github.com/pocoproject/poco
-	cd poco
-	git fetch --tags
-	latest_tag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
-	git checkout $latestTag
-	./configure --static --no-tests --no-samples
-	make -s -j16
-	sudo make install
-	cd ..
-	echo poco installed.
 }
 
 function setup_nvgt {
@@ -92,12 +61,9 @@ function main {
 	set -e
 	mkdir -p deps
 	cd deps
-	
+	setup_homebrew
 	setup_angelscript
-	setup_bullet
 	setup_enet
-	setup_libgit2
-	setup_poco
 	setup_nvgt
 	echo Success!
 	exit 0
