@@ -2,7 +2,6 @@
 
 function setup_homebrew {
 	brew install autoconf automake libgit2 libtool openssl sdl2 bullet
-	brew install --with-static poco
 }
 
 function setup_angelscript {
@@ -28,6 +27,16 @@ function setup_enet {
 	sudo make install
 	cd ..
 	echo Enet installed.
+}
+
+function setup_poco {
+	curl -s -O https://pocoproject.org/releases/poco-1.13.3/poco-1.13.3-all.tar.gz
+	tar -xzf poco-1.13.3-all.tar.gz
+	cd poco-1.13.3-all
+	./configure --static --no-tests --no-samples
+	make -s -j16
+	cd ..
+	rm poco-1.13.3-all.tar.gz
 }
 
 function setup_nvgt {
