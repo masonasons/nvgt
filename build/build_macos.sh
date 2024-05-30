@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 function setup_homebrew {
-	brew install autoconf automake libgit2 libtool openssl sdl2 bullet
+	brew install autoconf automake libtool openssl sdl2 bullet
 }
 
 function setup_angelscript {
@@ -27,6 +27,18 @@ function setup_enet {
 	sudo make install
 	cd ..
 	echo Enet installed.
+}
+
+function setup_libgit2 {
+	curl -s -O -L https://github.com/libgit2/libgit2/archive/refs/tags/v1.8.1.tar.gz
+	tar -xzf v1.8.1.tar.gz
+	cd libgit2-1.8.1
+	mkdir build
+	cd build
+	cmake .. -DBUILD_TESTS=OFF -DUSE_ICONV=OFF -DBUILD_CLI=OFF -DCMAKE_BUILD_TYPE=Release
+	cmake --build .
+	cd ../..
+	rm v1.8.1.tar.gz
 }
 
 function setup_poco {
@@ -57,7 +69,7 @@ function setup_nvgt {
 	fi
 	
 	echo Downloading macosdev...
-	wget https://nvgt.gg/macosdev.tar.gz
+	curl -s -O https://nvgt.gg/macosdev.tar.gz
 	mkdir macosdev
 	cd macosdev
 	tar -xvf ../macosdev.tar.gz
