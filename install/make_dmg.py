@@ -13,10 +13,10 @@ def make_executable(path):
 
 def make_app_bundle(bundle_name, release_path):
 	bundle_basename = f"{bundle_name}/Contents"
-	shutil.copytree(release_path + "/Resources/stub", bundle_basename + "/stub")
-	to_copy = [f for f in glob.glob(os.path.join(bundle_basename, "*")) if not os.path.isdir(f) or os.path.basename(f) != "stub"]
+	shutil.copytree(release_path + "/stub", bundle_basename + "/Resources/stub")
+	to_copy = [f for f in glob.glob(os.path.join(release_path, "*")) if not os.path.isdir(f) and os.path.basename(f) != "stub"]
 	for file in to_copy:
-		shutil.copy(file, bundle_basename)
+		shutil.copy(file, bundle_basename + "/MacOS")
 
 def make_dmg(src_dir, filename):
 	subprocess.check_call(["hdiutil", "create", "-srcfolder", src_dir, filename])
@@ -25,6 +25,6 @@ def get_version_info():
 	return Path("../version").read_text().replace("-", "_")
 
 relpath = "../release"
-if len(sys.argv) > 1
+if len(sys.argv) > 1:
 	relpath = " ".join(sys.argv[1:])
 make_app_bundle("nvgt.app", relpath)
