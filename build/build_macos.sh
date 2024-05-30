@@ -8,7 +8,7 @@ function setup_angelscript {
 	echo Installing Angelscript...
 	git clone https://github.com/codecat/angelscript-mirror
 	cd "angelscript-mirror/sdk/angelscript/projects/cmake"
-	mkdir build
+	mkdir -p build
 	cd build
 	cmake ..
 	cmake --build .
@@ -33,7 +33,7 @@ function setup_libgit2 {
 	curl -s -O -L https://github.com/libgit2/libgit2/archive/refs/tags/v1.8.1.tar.gz
 	tar -xzf v1.8.1.tar.gz
 	cd libgit2-1.8.1
-	mkdir build
+	mkdir -p build
 	cd build
 	cmake .. -DBUILD_TESTS=OFF -DUSE_ICONV=OFF -DBUILD_CLI=OFF -DCMAKE_BUILD_TYPE=Release
 	cmake --build .
@@ -70,7 +70,7 @@ function setup_nvgt {
 	
 	echo Downloading macosdev...
 	curl -s -O https://nvgt.gg/macosdev.tar.gz
-	mkdir macosdev
+	mkdir -p macosdev
 	cd macosdev
 	tar -xvf ../macosdev.tar.gz
 	cd ..
