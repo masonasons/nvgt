@@ -1,7 +1,8 @@
 #!/bin/zsh
 
 function setup_homebrew {
-	brew install autoconf automake libgit2 libtool openssl sdl2 bullet poco
+	brew install autoconf automake libgit2 libtool openssl sdl2 bullet
+	brew install --with-static poco
 }
 
 function setup_angelscript {
